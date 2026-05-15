@@ -504,23 +504,164 @@
   };
 
   /* ---- Pane toggles (mobile) ---- */
-  $('#left-toggle').onclick = () => document.querySelector('.builder-pane').classList.toggle('hide');
-  $('#right-toggle').onclick = () => document.querySelector('.builder-pane.right').classList.toggle('hide');
+  const leftPane = $('#left-pane');
+  const rightPane = $('#right-pane');
+  const backdrop = $('#mobile-backdrop');
+  const isMobile = () => window.innerWidth <= 1100;
+
+  function openPane(pane) {
+    if (!isMobile()) return;
+    pane.classList.add('mobile-open');
+    backdrop.classList.add('show');
+  }
+  function closeAllPanes() {
+    leftPane.classList.remove('mobile-open');
+    rightPane.classList.remove('mobile-open');
+    backdrop.classList.remove('show');
+  }
+  $('#left-toggle').onclick = () => closeAllPanes();
+  $('#right-toggle').onclick = () => closeAllPanes();
+  if (backdrop) backdrop.onclick = () => closeAllPanes();
+
+  /* Pull-to-close: swipe down on pane handles */
+  [leftPane, rightPane].forEach(pane => {
+    let startY = 0, currentY = 0, dragging = false;
+    const handle = pane.querySelector('.pull-handle');
+    if (!handle) return;
+    handle.addEventListener('touchstart', e => {
+      startY = e.touches[0].clientY; dragging = true;
+      pane.style.transition = 'none';
+    }, { passive: true });
+    handle.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      currentY = e.touches[0].clientY;
+      const diff = currentY - startY;
+      if (diff > 0) pane.style.transform = `translateY(${diff}px)`;
+    }, { passive: true });
+    handle.addEventListener('touchend', () => {
+      dragging = false;
+      pane.style.transition = '';
+      const diff = currentY - startY;
+      if (diff > 100) { closeAllPanes(); }
+      pane.style.transform = '';
+      startY = 0; currentY = 0;
+    });
+  });
 
   /* ---- Mobile FAB toolbar ---- */
+  const mobileDeviceModes = ['desktop', 'mobile', 'tablet'];
+  let mobileDeviceIdx = 0;
+
   $$('.fab-toolbar button').forEach(b => {
     b.addEventListener('click', () => {
-      $$('.fab-toolbar button').forEach(x => x.classList.toggle('active', x === b));
       const k = b.dataset.fab;
-      const left = document.querySelector('.builder-pane');
-      const right = document.querySelector('.builder-pane.right');
-      const preview = document.querySelector('.preview-wrap');
-      [left, right, preview].forEach(el => el.classList.add('hide'));
-      if (k === 'prompt') left.classList.remove('hide');
-      else if (k === 'tools') right.classList.remove('hide');
-      else if (k === 'preview') preview.classList.remove('hide');
+
+      // Device toggle cycles through modes
+      if (k === 'device') {
+        mobileDeviceIdx = (mobileDeviceIdx + 1) % mobileDeviceModes.length;
+        const mode = mobileDeviceModes[mobileDeviceIdx];
+        previewFr.classList.remove('mobile', 'tablet', 'desktop');
+        previewFr.classList.add(mode);
+        toast(`Preview: ${mode}`, 'info');
+        return;
+      }
+
+      // Highlight active
+      $$('.fab-toolbar button').forEach(x => {
+        if (x.dataset.fab !== 'device') x.classList.toggle('active', x === b);
+      });
+
+      closeAllPanes();
+
+      if (k === 'prompt') openPane(leftPane);
+      else if (k === 'tools') openPane(rightPane);
       else if (k === 'publish') publishBtn.click();
+      // 'preview' just closes panes (done by closeAllPanes above)
     });
+  });
+
+  /* ---- Mobile gesture: swipe on preview to open panes ---- */
+  (function initSwipeGestures() {
+    const stage = document.querySelector('.preview-stage');
+    if (!stage) return;
+    let touchStartX = 0, touchStartY = 0, swiping = false;
+
+    stage.addEventListener('touchstart', e => {
+      if (!isMobile()) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      swiping = true;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', e => {
+      if (!swiping || !isMobile()) return;
+      swiping = false;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      // Only trigger on horizontal swipes (dx > dy)
+      if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+      if (dx > 0) {
+        // Swipe right → open prompt pane
+        openPane(leftPane);
+        $$('.fab-toolbar button').forEach(x => {
+          if (x.dataset.fab !== 'device') x.classList.toggle('active', x.dataset.fab === 'prompt');
+        });
+      } else {
+        // Swipe left → open tools pane
+        openPane(rightPane);
+        $$('.fab-toolbar button').forEach(x => {
+          if (x.dataset.fab !== 'device') x.classList.toggle('active', x.dataset.fab === 'tools');
+        });
+      }
+    });
+  })();
+
+  /* ---- Double-tap preview to show quick generate ---- */
+  (function initDoubleTap() {
+    const stage = document.querySelector('.preview-stage');
+    if (!stage) return;
+    let lastTap = 0;
+    stage.addEventListener('touchend', e => {
+      if (!isMobile()) return;
+      const now = Date.now();
+      if (now - lastTap < 300) {
+        // Double tap detected → open prompt pane
+        e.preventDefault();
+        openPane(leftPane);
+        $$('.fab-toolbar button').forEach(x => {
+          if (x.dataset.fab !== 'device') x.classList.toggle('active', x.dataset.fab === 'prompt');
+        });
+        promptInput.focus();
+      }
+      lastTap = now;
+    });
+  })();
+
+  /* ---- Haptic feedback (if supported) ---- */
+  function vibrate(ms) {
+    if (navigator.vibrate) navigator.vibrate(ms || 10);
+  }
+  // Add haptics to generate button
+  generateBtn.addEventListener('click', () => vibrate(15));
+  publishBtn.addEventListener('click', () => vibrate(15));
+  $$('.fab-toolbar button').forEach(b => b.addEventListener('click', () => vibrate(8)));
+
+  /* ---- Auto-resize prompt textarea on mobile ---- */
+  promptInput.addEventListener('input', () => {
+    promptInput.style.height = 'auto';
+    promptInput.style.height = Math.min(promptInput.scrollHeight, 200) + 'px';
+  });
+
+  /* ---- Prevent pull-to-refresh in preview on mobile ---- */
+  document.querySelector('.preview-stage')?.addEventListener('touchmove', e => {
+    if (e.target.closest('.preview-frame')) {
+      // Allow scrolling inside iframe area
+    }
+  }, { passive: true });
+
+  /* ---- Orientation change: close panes ---- */
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => closeAllPanes(), 200);
   });
 
   /* ---- Init: load project from URL or template ---- */

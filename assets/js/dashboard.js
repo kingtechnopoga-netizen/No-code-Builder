@@ -19,8 +19,25 @@
     if (tab === 'settings')  renderSettings();
     if (window.innerWidth <= 880) $('#sidebar').classList.remove('open');
     history.replaceState(null, '', `?tab=${tab}`);
+    syncBottomNav(tab);
   }
   links.forEach(l => l.addEventListener('click', () => activate(l.dataset.tab)));
+
+  /* Mobile bottom nav */
+  const bottomNav = $('#dash-bottom-nav');
+  if (bottomNav) {
+    $$('button[data-tab]', bottomNav).forEach(btn => {
+      btn.addEventListener('click', () => {
+        $$('button[data-tab]', bottomNav).forEach(b => b.classList.toggle('active', b === btn));
+        activate(btn.dataset.tab);
+      });
+    });
+  }
+  // Sync bottom nav active state with sidebar
+  function syncBottomNav(tab) {
+    if (!bottomNav) return;
+    $$('button[data-tab]', bottomNav).forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  }
 
   /* Mobile menu */
   const menuBtn = $('#menu-toggle');

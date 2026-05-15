@@ -13,15 +13,19 @@
 
 <div class="builder-shell">
 
+  <!-- Mobile backdrop for slide-up panes -->
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
+
   <!-- ===== LEFT PANE (Prompt + Components + Templates) ===== -->
-  <aside class="builder-pane">
+  <aside class="builder-pane" id="left-pane">
+    <div class="pull-handle"></div>
     <div class="pane-head">
       <a href="dashboard.html" class="row gap-sm" style="color:inherit;">
         <span class="brand-mark" style="width:28px;height:28px;font-size:14px;border-radius:8px;">N</span>
         <span style="font-weight:700;">NEXUS<span class="text-grad">.</span>ai</span>
       </a>
-      <button id="left-toggle" class="btn btn-ghost btn-icon" aria-label="Toggle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      <button id="left-toggle" class="btn btn-ghost btn-icon" aria-label="Close panel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
 
@@ -109,11 +113,12 @@ e.g. Create a horror storytelling website with featured tales and dark fog anima
   </section>
 
   <!-- ===== RIGHT PANE (Inspector + AI Tools) ===== -->
-  <aside class="builder-pane right">
+  <aside class="builder-pane right" id="right-pane">
+    <div class="pull-handle"></div>
     <div class="pane-head">
       <h3>AI Tools</h3>
-      <button id="right-toggle" class="btn btn-ghost btn-icon" aria-label="Toggle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      <button id="right-toggle" class="btn btn-ghost btn-icon" aria-label="Close panel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
     <div class="pane-body">
@@ -194,11 +199,22 @@ e.g. Create a horror storytelling website with featured tales and dark fog anima
 </div>
 
 <!-- Floating bottom toolbar (mobile) -->
-<div class="fab-toolbar">
-  <button data-fab="prompt" title="Prompt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button>
-  <button data-fab="preview" class="active" title="Preview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-  <button data-fab="tools" title="Tools"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
-  <button data-fab="publish" title="Publish"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+<div class="fab-toolbar" id="fab-toolbar">
+  <button data-fab="prompt" title="Prompt">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
+  </button>
+  <button data-fab="preview" class="active" title="Preview">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+  </button>
+  <button data-fab="device" title="Switch Device">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+  </button>
+  <button data-fab="tools" title="AI Tools">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 7H22l-6 4.5L18 21l-6-4.5L6 21l2-7.5L2 9h7.5z"/></svg>
+  </button>
+  <button data-fab="publish" title="Publish">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+  </button>
 </div>
 
 <script src="assets/js/ui.js"></script>

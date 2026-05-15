@@ -24,7 +24,7 @@
       <span class="brand-mark">N</span>
       <span>NEXUS<span class="text-grad">.</span>ai</span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#features">Features</a>
       <a href="#templates">Templates</a>
       <a href="#pricing">Pricing</a>
@@ -32,7 +32,25 @@
       <a href="login.html" class="btn btn-ghost btn-sm">Sign in</a>
       <a href="builder.html" class="btn btn-primary btn-sm">Start Building →</a>
     </div>
+    <button class="btn btn-ghost btn-icon mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-inner glass-strong">
+      <div class="pull-handle"></div>
+      <a href="#features" class="side-link">Features</a>
+      <a href="#templates" class="side-link">Templates</a>
+      <a href="#pricing" class="side-link">Pricing</a>
+      <a href="#faq" class="side-link">FAQ</a>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
+        <a href="login.html" class="btn btn-ghost" style="width:100%;justify-content:center;">Sign in</a>
+        <a href="builder.html" class="btn btn-primary" style="width:100%;justify-content:center;">Start Building →</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== HERO ===== -->
   <section class="hero">
@@ -145,7 +163,7 @@
       <p>Hand-crafted starters across every niche — fully editable, fully yours.</p>
     </div>
 
-    <div id="cat-pills" class="row wrap" style="justify-content:center;margin-bottom:30px;"></div>
+    <div id="cat-pills" class="pills-scroll" style="justify-content:center;margin-bottom:30px;"></div>
     <div id="tpl-grid" class="grid"></div>
 
     <div class="center mt-lg">

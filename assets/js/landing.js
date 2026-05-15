@@ -103,4 +103,24 @@ p{color:#a1a1aa;max-width:540px;line-height:1.55;font-size:15px;margin-bottom:20
     });
   }, { threshold: 0.12 });
   $$('.section .feature-card, .section .price-card, .faq-item').forEach(el => io.observe(el));
+
+  /* Mobile menu drawer */
+  const menuBtn = $('#mobile-menu-btn');
+  const drawer = $('#mobile-nav-drawer');
+  if (menuBtn && drawer) {
+    menuBtn.addEventListener('click', () => drawer.classList.add('open'));
+    drawer.addEventListener('click', (e) => {
+      if (e.target === drawer || e.target.closest('a')) drawer.classList.remove('open');
+    });
+    // Swipe down to close
+    let startY = 0;
+    const inner = drawer.querySelector('.mobile-nav-inner');
+    if (inner) {
+      inner.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+      inner.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientY - startY;
+        if (diff > 60) drawer.classList.remove('open');
+      });
+    }
+  }
 })();

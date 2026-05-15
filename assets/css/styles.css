@@ -881,3 +881,406 @@ img { max-width: 100%; display: block; }
   color: var(--orange-300);
   border: 1px solid rgba(255, 107, 26, .25);
 }
+
+
+/* ============================================
+   MOBILE-FIRST ENHANCEMENTS
+   High-quality responsive UI · Touch-optimized
+   ============================================ */
+
+/* ---------- Global Mobile Improvements ---------- */
+@media (max-width: 680px) {
+  html { font-size: 15px; }
+  body { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+  /* Larger touch targets on all interactive elements */
+  .btn { min-height: 44px; min-width: 44px; padding: 12px 16px; font-size: 14px; }
+  .btn-sm { min-height: 40px; padding: 10px 14px; }
+  .btn-lg { min-height: 52px; padding: 16px 24px; font-size: 16px; }
+  .btn-icon { width: 44px; height: 44px; }
+
+  .input, .textarea, .select { padding: 14px 16px; font-size: 16px; border-radius: 14px; /* prevents iOS zoom */ }
+  .textarea { min-height: 100px; }
+
+  /* Nav mobile */
+  .nav { padding: 12px 16px; gap: 8px; }
+  .brand { font-size: 16px; }
+  .brand-mark { width: 30px; height: 30px; font-size: 14px; }
+  .nav-links .btn { min-height: 38px; padding: 8px 12px; font-size: 13px; }
+
+  /* Hero mobile */
+  .hero { padding: clamp(36px, 7vw, 60px) 16px 48px; }
+  .hero h1 { font-size: clamp(32px, 9vw, 56px); margin: 14px auto 16px; }
+  .hero p.lead { font-size: 15px; margin-bottom: 24px; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .hero-demo { grid-template-columns: 1fr !important; }
+
+  /* Sections */
+  .section { padding: clamp(40px, 6vw, 60px) 16px; }
+  .section-head { margin-bottom: 32px; }
+  .section-head h2 { font-size: clamp(24px, 7vw, 36px); }
+
+  /* Grid */
+  .grid { grid-template-columns: 1fr !important; gap: 14px; }
+
+  /* Feature cards */
+  .feature-card { padding: 20px; }
+  .feature-card h3 { font-size: 16px; }
+  .feature-card p { font-size: 13px; }
+
+  /* Pricing */
+  .price-card { padding: 24px; }
+  .price-card.featured { transform: none; }
+  .price-card .price { font-size: 38px; }
+
+  /* FAQ */
+  .faq-item { padding: 16px 18px; }
+  .faq-q { font-size: 14px; gap: 12px; }
+  .faq-a { font-size: 13px; }
+
+  /* Footer */
+  .footer { padding: 40px 16px 24px; margin-top: 48px; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 24px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* Cat pills - horizontal scroll on mobile */
+  .cat-pill { padding: 8px 16px; font-size: 13px; white-space: nowrap; }
+
+  /* Project cards */
+  .project-card { padding: 16px; min-height: 140px; }
+  .project-meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+
+  /* Toast at bottom, clear of FAB */
+  .toast-host { bottom: 90px; max-width: calc(100% - 32px); }
+  .toast { font-size: 14px; padding: 14px 18px; }
+
+  /* Modal fullscreen-ish on mobile */
+  .modal-host { padding: 16px; align-items: flex-end; }
+  .modal { max-width: 100%; max-height: 85vh; overflow-y: auto; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 24px 20px; }
+
+  /* Eyebrow */
+  .eyebrow { font-size: 11px; padding: 5px 10px; }
+}
+
+/* ---------- Dashboard Mobile ---------- */
+@media (max-width: 880px) {
+  .app-topbar { padding: 0; }
+  .app-topbar h1 { font-size: 22px; }
+
+  /* Bottom navigation for dashboard */
+  .dash-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 4px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    background: rgba(10, 10, 11, .95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--line);
+    z-index: 75;
+  }
+  .dash-bottom-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    min-width: 56px;
+    transition: color .2s, background .2s;
+  }
+  .dash-bottom-nav button.active { color: var(--orange-400); background: rgba(255, 107, 26, .1); }
+  .dash-bottom-nav button svg { width: 20px; height: 20px; }
+
+  /* Chat mobile */
+  .chat-msgs { padding: 12px 10px; gap: 10px; }
+  .msg { max-width: 92%; padding: 12px 14px; font-size: 14px; border-radius: 16px; }
+  .chat-input-row { padding: 10px 12px; padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+  .chat-input-row .textarea { font-size: 16px; min-height: 44px; border-radius: 22px; padding: 12px 16px; }
+}
+
+/* ---------- Builder Mobile ---------- */
+@media (max-width: 1100px) {
+  .builder-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    height: 100dvh; /* dynamic viewport height for mobile browsers */
+  }
+
+  .builder-pane {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100% !important;
+    z-index: 50;
+    transform: translateY(100%);
+    transition: transform .35s var(--tx);
+    border: none !important;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    background: rgba(10, 10, 11, .98);
+  }
+  .builder-pane.right { transform: translateY(100%); }
+  .builder-pane.mobile-open { transform: translateY(0); }
+
+  .preview-wrap {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .preview-toolbar {
+    padding: 8px 12px;
+    gap: 6px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .preview-toolbar #title-input { max-width: 140px; font-size: 14px; }
+  .preview-toolbar .device-toggle { display: none; }
+  .preview-toolbar .row.gap-sm { gap: 4px; }
+  .preview-toolbar #undo-btn, .preview-toolbar #redo-btn { display: none; }
+  .preview-toolbar #save-status { display: none; }
+
+  .preview-stage { padding: 0; }
+  .preview-frame {
+    border-radius: 0;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: unset !important;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* ---------- FAB Toolbar Enhanced ---------- */
+@media (max-width: 1100px) {
+  .fab-toolbar {
+    display: inline-flex !important;
+    bottom: 12px;
+    padding: 6px 10px;
+    gap: 4px;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px -10px rgba(0, 0, 0, .8), 0 0 0 1px var(--line-strong);
+  }
+  .fab-toolbar button {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    transition: all .2s var(--tx);
+  }
+  .fab-toolbar button.active {
+    background: var(--grad-orange);
+    color: #fff;
+    box-shadow: 0 6px 20px -4px rgba(255, 107, 26, .5);
+    transform: scale(1.05);
+  }
+  .fab-toolbar button svg { width: 20px; height: 20px; }
+
+  /* AI FAB repositioned above toolbar */
+  .ai-fab { bottom: 80px; right: 16px; width: 50px; height: 50px; }
+  .ai-panel {
+    right: 8px;
+    bottom: 140px;
+    width: calc(100% - 16px);
+    max-width: 400px;
+    height: calc(100vh - 180px);
+    height: calc(100dvh - 180px);
+    max-height: 560px;
+    border-radius: var(--radius-xl);
+  }
+}
+
+/* ---------- Smooth Scroll & Performance ---------- */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  * { -webkit-tap-highlight-color: rgba(255, 107, 26, .1); }
+
+  .feature-card:hover { transform: none; } /* Disable hover lift on touch */
+  .project-card:hover { transform: none; }
+  .btn-primary:hover { transform: none; }
+
+  /* Active state for touch feedback */
+  .feature-card:active { transform: scale(.98); opacity: .9; }
+  .project-card:active { transform: scale(.97); opacity: .9; }
+  .btn:active { transform: scale(.95); }
+  .comp-item:active { transform: scale(.97); background: rgba(255, 107, 26, .1); }
+  .cat-pill:active { transform: scale(.95); }
+  .side-link:active { background: rgba(255, 107, 26, .12); }
+
+  /* Momentum scrolling */
+  .pane-body, .chat-msgs, .preview-stage {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Larger interactive elements for fat fingers */
+  .comp-item { padding: 14px 14px; min-height: 48px; font-size: 14px; }
+  .side-link { padding: 14px 16px; min-height: 48px; }
+  .faq-q { min-height: 48px; padding: 4px 0; }
+}
+
+/* ---------- iOS Safe Area ---------- */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .fab-toolbar { bottom: calc(12px + env(safe-area-inset-bottom)); }
+  .toast-host { bottom: calc(90px + env(safe-area-inset-bottom)); }
+  .dash-bottom-nav { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+  .ai-fab { bottom: calc(80px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- Dark Mode + Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Small phones (< 380px) ---------- */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 28px; }
+  .hero p.lead { font-size: 14px; }
+  .nav { padding: 10px 12px; }
+  .brand-mark { width: 26px; height: 26px; font-size: 12px; }
+  .brand { font-size: 15px; gap: 8px; }
+  .section { padding: 32px 12px; }
+  .feature-card { padding: 16px; }
+  .price-card { padding: 18px; }
+  .fab-toolbar { padding: 4px 6px; }
+  .fab-toolbar button { width: 42px; height: 42px; }
+  .modal { padding: 18px 14px; }
+}
+
+/* ---------- Tablet (landscape) ---------- */
+@media (min-width: 681px) and (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-demo { grid-template-columns: 1fr 1.2fr !important; }
+  .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
+}
+
+/* ---------- Scrollable pill row ---------- */
+.pills-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pills-scroll::-webkit-scrollbar { display: none; }
+
+/* ---------- Mobile overlay backdrop ---------- */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(4px);
+  z-index: 45;
+  display: none;
+  animation: fadeIn .2s var(--tx);
+}
+.mobile-backdrop.show { display: block; }
+
+/* ---------- Pull-to-close handle ---------- */
+.pull-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .2);
+  margin: 10px auto 6px;
+}
+
+/* ---------- Improved code panes on mobile ---------- */
+@media (max-width: 1100px) {
+  .code-pane {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', monospace;
+    line-height: 1.5;
+    padding: 14px;
+    min-height: 200px;
+    border-radius: 14px;
+  }
+}
+
+/* ---------- Loading states ---------- */
+.btn.loading {
+  pointer-events: none;
+  opacity: .7;
+}
+.btn.loading::after {
+  content: '';
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+  margin-left: 6px;
+}
+
+/* ---------- Swipe indicator ---------- */
+.swipe-hint {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 48px;
+  border-radius: 2px;
+  background: rgba(255, 107, 26, .4);
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.swipe-hint.left { left: 4px; }
+.swipe-hint.right { right: 4px; }
+.swipe-hint.visible { opacity: 1; }
+
+
+/* ---------- Mobile Nav Drawer (Landing) ---------- */
+.mobile-menu-btn { display: none; }
+@media (max-width: 820px) {
+  .mobile-menu-btn { display: inline-grid; }
+  .nav-links { display: none !important; }
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn .2s var(--tx);
+}
+.mobile-nav-drawer.open { display: flex; }
+.mobile-nav-inner {
+  width: 100%;
+  max-width: 480px;
+  padding: 8px 20px 28px;
+  padding-bottom: max(28px, env(safe-area-inset-bottom));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  animation: slideUp .3s var(--tx);
+}
+.mobile-nav-inner .side-link {
+  font-size: 16px;
+  padding: 16px 14px;
+  border-radius: 14px;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
