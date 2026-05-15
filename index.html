@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <title>NEXUS — Build Apps with AI</title>
+  <meta name="description" content="NEXUS is the AI no-code builder for the next generation of creators. Type a prompt, ship a website. Powered by Puter.js — no API keys, no setup.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ff8f3d'/%3E%3Cstop offset='1' stop-color='%23e8530a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Space Grotesk' font-weight='800' font-size='30' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+
+  <!-- Puter.js SDK -->
+  <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">N</span>
+      <span>NEXUS<span class="text-grad">.</span>ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#templates">Templates</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="login.html" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="builder.html" class="btn btn-primary btn-sm">Start Building →</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <span class="eyebrow fade-up">⚡ Powered by Puter.js · No API keys</span>
+    <h1 class="h-display fade-up" style="animation-delay:.05s;">
+      Build apps with <span class="text-grad">AI</span>.<br>
+      Just type. Ship in seconds.
+    </h1>
+    <p class="lead fade-up" style="animation-delay:.1s;">
+      NEXUS turns plain English into production-ready websites and apps. No setup, no code, no API keys —
+      just prompt, preview, and publish from your phone or laptop.
+    </p>
+    <div class="hero-cta fade-up" style="animation-delay:.15s;">
+      <a href="builder.html" class="btn btn-primary btn-lg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Start building free
+      </a>
+      <a href="#demo" class="btn btn-outline btn-lg">Watch demo</a>
+    </div>
+
+    <!-- Hero preview card -->
+    <div id="demo" class="glass-strong fade-up" style="margin:60px auto 0;max-width:1100px;padding:14px;animation-delay:.25s;">
+      <div class="row" style="padding:6px 8px 12px;gap:6px;">
+        <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:#28c840;"></span>
+        <span class="dim" style="margin-left:12px;font-size:12px;">nexus.ai/builder</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:14px;" class="hero-demo">
+        <div class="glass" style="padding:18px;">
+          <div class="tag mb-md">Prompt</div>
+          <p style="margin:0 0 10px;font-size:14px;line-height:1.55;">
+            <span id="typed-prompt"></span><span class="cursor">|</span>
+          </p>
+          <div class="row" style="gap:6px;flex-wrap:wrap;">
+            <span class="cat-pill">🎃 Horror</span>
+            <span class="cat-pill">🤖 AI</span>
+            <span class="cat-pill">🎬 Reels</span>
+          </div>
+        </div>
+        <div class="glass" style="padding:0;overflow:hidden;aspect-ratio:16/10;">
+          <iframe id="hero-preview" title="Live preview" style="width:100%;height:100%;border:0;background:#fff;"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="section" id="features">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Everything you need</span>
+      <h2 class="h-display">A studio in your <span class="text-grad">pocket</span></h2>
+      <p>Designed mobile-first for creators who want to ship — fast. Every tool you'd expect from Framer, Lovable, or Replit, fused into one AI-native canvas.</p>
+    </div>
+
+    <div class="grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+        <h3>AI Prompt Builder</h3>
+        <p>Type what you want, watch a complete site stream into existence — semantic HTML, modern CSS, and vanilla JS.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Live Multi-Device Preview</h3>
+        <p>Toggle mobile, tablet, and desktop views in one tap. Pixel-accurate previews that update as you build.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9V5a2 2 0 012-2h4M19 15v4a2 2 0 01-2 2h-4M5 15v4a2 2 0 002 2h4M19 9V5a2 2 0 00-2-2h-4"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Drag & Drop Editor</h3>
+        <p>Move, resize, and edit elements visually. Sidebar component library with buttons, hero blocks, forms, and more.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>AI Assistant Chat</h3>
+        <p>A floating co-pilot that fixes bugs, redesigns sections, and explains errors — without ever leaving your canvas.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
+        <h3>One-Click Publish</h3>
+        <p>Push live to a public URL instantly. Share your build with the world — hosted on Puter, no DevOps needed.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Cloud Project Sync</h3>
+        <p>Auto-save to Puter cloud. Pick up where you left off on any device. Folders, files, history — handled.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Voice Prompts</h3>
+        <p>Tap the mic and dictate. Turn ideas into apps without typing — perfect for mobile creators on the go.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
+        <h3>AI Image & Palette</h3>
+        <p>Generate hero images, logos, and full color palettes from a sentence. Brand identity in seconds.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>Templates Marketplace</h3>
+        <p>Horror, AI tools, portfolios, reels, business, anime, gaming, memes — start from a vibe, not a blank page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEMPLATES PREVIEW ===== -->
+  <section class="section" id="templates">
+    <div class="section-head">
+      <span class="eyebrow">Marketplace</span>
+      <h2 class="h-display">Start with a <span class="text-grad">vibe</span></h2>
+      <p>Hand-crafted starters across every niche — fully editable, fully yours.</p>
+    </div>
+
+    <div id="cat-pills" class="row wrap" style="justify-content:center;margin-bottom:30px;"></div>
+    <div id="tpl-grid" class="grid"></div>
+
+    <div class="center mt-lg">
+      <a href="builder.html" class="btn btn-outline">Browse all templates →</a>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">Loved by creators</span>
+      <h2 class="h-display">Built for the next <span class="text-grad">10 million</span> makers</h2>
+    </div>
+    <div class="grid">
+      <div class="feature-card">
+        <p style="font-size:15px;line-height:1.6;margin:0 0 14px;">"I built a horror storytelling site on the bus. By the time I got home, it was live. NEXUS is unreal."</p>
+        <div class="row" style="gap:10px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6);"></div>
+          <div><div style="font-weight:600;font-size:14px;">Aniketa R.</div><div class="dim" style="font-size:12px;">Indie Creator</div></div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <p style="font-size:15px;line-height:1.6;margin:0 0 14px;">"My students who never wrote a line of code shipped their first portfolio in 8 minutes. Game-changer."</p>
+        <div class="row" style="gap:10px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#06b6d4,#3b82f6);"></div>
+          <div><div style="font-weight:600;font-size:14px;">Marcus L.</div><div class="dim" style="font-size:12px;">CS Educator</div></div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <p style="font-size:15px;line-height:1.6;margin:0 0 14px;">"Voice-prompts on Android changed everything. I now design from my hammock. Yes, my hammock."</p>
+        <div class="row" style="gap:10px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);"></div>
+          <div><div style="font-weight:600;font-size:14px;">Priya S.</div><div class="dim" style="font-size:12px;">Freelance Designer</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="section" id="pricing">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="h-display">Free for makers. <span class="text-grad">Forever.</span></h2>
+      <p>Powered by Puter.js — your AI usage is covered by the platform. No API keys, no surprise bills.</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:1080px;margin:0 auto;">
+      <div class="price-card">
+        <div class="tag">Hobby</div>
+        <div class="price">$0<span style="font-size:16px;color:var(--text-muted);">/mo</span></div>
+        <p class="dim" style="margin:0;font-size:14px;">For creators just starting out.</p>
+        <ul>
+          <li>Unlimited AI generations</li>
+          <li>Up to 5 projects</li>
+          <li>Cloud sync via Puter</li>
+          <li>Public publishing</li>
+        </ul>
+        <a href="builder.html" class="btn btn-outline" style="width:100%;">Get started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="tag" style="background:var(--grad-orange);color:#fff;border:0;">Pro</div>
+        <div class="price">$12<span style="font-size:16px;color:var(--text-muted);">/mo</span></div>
+        <p class="dim" style="margin:0;font-size:14px;">For serious creators shipping daily.</p>
+        <ul>
+          <li>Everything in Hobby</li>
+          <li>Unlimited projects</li>
+          <li>Custom domains</li>
+          <li>Priority AI lane</li>
+          <li>AI image generation (4K)</li>
+        </ul>
+        <a href="builder.html" class="btn btn-primary" style="width:100%;">Start free trial</a>
+      </div>
+      <div class="price-card">
+        <div class="tag">Studio</div>
+        <div class="price">$39<span style="font-size:16px;color:var(--text-muted);">/mo</span></div>
+        <p class="dim" style="margin:0;font-size:14px;">For teams and agencies.</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Team workspaces</li>
+          <li>Brand kits & component library</li>
+          <li>Client review mode</li>
+        </ul>
+        <a href="builder.html" class="btn btn-outline" style="width:100%;">Talk to sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq" style="max-width:820px;">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2 class="h-display">Frequently <span class="text-grad">asked</span></h2>
+    </div>
+
+    <details class="faq-item">
+      <summary class="faq-q">Do I need an OpenAI or other AI key? <span class="chev">▾</span></summary>
+      <p class="faq-a">No. NEXUS uses Puter.js, which provides AI access to every signed-in user — no API keys, no billing setup.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Where are my projects saved? <span class="chev">▾</span></summary>
+      <p class="faq-a">Signed in, projects sync to your private Puter cloud. As a guest, they live in your browser's local storage.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Can I export my code? <span class="chev">▾</span></summary>
+      <p class="faq-a">Yes. Every project exports as a clean ZIP (HTML / CSS / JS) you can host anywhere.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Does it work on Android phones? <span class="chev">▾</span></summary>
+      <p class="faq-a">It's designed mobile-first. We tested on entry-level Android devices — touch gestures, voice prompts, and a floating bottom toolbar are all built-in.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Can I publish to a custom domain? <span class="chev">▾</span></summary>
+      <p class="faq-a">Yes — every site gets a free Puter subdomain. Custom domain support is on the Pro plan.</p>
+    </details>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><span class="brand-mark">N</span><span>NEXUS<span class="text-grad">.</span>ai</span></div>
+        <p class="dim" style="margin-top:14px;font-size:14px;line-height:1.6;max-width:300px;">
+          The AI no-code builder for the next generation of creators. Type a prompt. Ship a site.
+        </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="builder.html">Builder</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="#templates">Templates</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NEXUS AI · Built with Puter.js</span>
+      <span class="row gap-md">
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+        <a href="#">Discord</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/templates.js"></script>
+  <script src="assets/js/landing.js"></script>
+</body>
+</html>

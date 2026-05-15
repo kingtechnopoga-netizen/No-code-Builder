@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <title>Preview — NEXUS AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://js.puter.com/v2/"></script>
+  <style>
+    body { display:flex; flex-direction:column; height:100vh; margin:0; }
+    .preview-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 16px; border-bottom:1px solid var(--line); background:rgba(10,10,11,.85);
+      backdrop-filter:blur(16px); flex-wrap:wrap; gap:10px;
+    }
+    .preview-bar .url { font-family:monospace; font-size:12px; color:var(--text-dim); padding:4px 10px; background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:8px; }
+    iframe.full { flex:1; width:100%; border:0; background:#fff; }
+  </style>
+</head>
+<body>
+  <div class="preview-bar">
+    <a href="dashboard.html" class="brand">
+      <span class="brand-mark">N</span><span>NEXUS<span class="text-grad">.</span>ai</span>
+    </a>
+    <span class="url" id="meta-title">Loading…</span>
+    <div class="row gap-sm">
+      <button id="copy-link" class="btn btn-ghost btn-sm">Copy link</button>
+      <a id="edit-link" href="#" class="btn btn-outline btn-sm">Edit</a>
+    </div>
+  </div>
+  <iframe id="full-iframe" class="full" title="Project preview"></iframe>
+
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/puter-bridge.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    (async function () {
+      const { toast } = window.UI;
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      if (!id) { document.getElementById('meta-title').textContent = 'No project specified'; return; }
+      try {
+        const p = await ProjectStore.getProject(id);
+        if (!p) { document.getElementById('meta-title').textContent = 'Project not found'; return; }
+        document.title = p.title + ' — NEXUS Preview';
+        document.getElementById('meta-title').textContent = p.title;
+        document.getElementById('full-iframe').srcdoc = ProjectStore.buildHtmlDoc(p);
+        document.getElementById('edit-link').href = 'builder.html?id=' + id;
+        document.getElementById('copy-link').onclick = () => UI.copyToClipboard(location.href).then(()=>toast('Link copied','success'));
+      } catch (e) {
+        document.getElementById('meta-title').textContent = 'Failed to load';
+      }
+    })();
+  </script>
+</body>
+</html>
